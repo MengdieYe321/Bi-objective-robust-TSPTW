@@ -17,7 +17,7 @@ runner::~runner()
 void runner::runBiObjRTSPTW(std::string filename, PrimObjType prim_obj, SecObjType sec_obj, MethodType method, double time_limit)
 {
 	/*load the instance*/
-	instance inst(filename, prim_obj, sec_obj);
+	instance inst(filename, prim_obj, sec_obj); // remember to check the input path in instance.cpp
 	std::cout << "Solve bi-objective " << prim_obj << "-" << sec_obj << " using " << method << " for instance " << inst._prob_name << std::endl;
 	nondominate_list non;
 	algorithm algo;
@@ -29,8 +29,7 @@ void runner::runBiObjRTSPTW(std::string filename, PrimObjType prim_obj, SecObjTy
 	double time_BBM = time_limit - time_MDLS;
 
 	/*output info*/
-	//std::string folder_name;// = paths::output + "N60/discrete/size_" + std::to_string(num_insample) + "/0-60";
-	std::string folder_name = paths::output;
+	std::string folder_name = paths::output + "N60/size_80/"; // need to be changed accordingly for different instance sets
 	/*if (!std::filesystem::is_directory(folder_name) || !std::filesystem::exists(folder_name))
 	{
 		std::filesystem::create_directories(folder_name);
@@ -38,9 +37,10 @@ void runner::runBiObjRTSPTW(std::string filename, PrimObjType prim_obj, SecObjTy
 	
 	std::string prim_name = prim_obj == PrimObjType::distance ? "cost" : "TD";
 	std::string sec_name = sec_obj == SecObjType::delta ? "delta" : "slack";
+	std::string interval_usage = BUDGET_INTERVAL == 1 ? "multi" : "single";
 	std::string obj_name = prim_name + "-" + sec_name;
 	std::string method_name = method == MethodType::multi_direction ? "MDLS" : "MBBM";
-	std::string outputfilename = folder_name + "/" + obj_name + "_" + method_name + "_" + inst._prob_name + ".txt";
+	std::string outputfilename = folder_name + "/" + obj_name + "_" + interval_usage + "/" + obj_name + "_" + method_name + "_" + inst._prob_name + ".txt";
 	
 	if (!MULTIPLE_INTERVALS)
 	{
