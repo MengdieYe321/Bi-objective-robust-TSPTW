@@ -1,4 +1,4 @@
-﻿#include"runner.h"
+#include"runner.h"
 
 int main(int argc, char* argv[])
 {
@@ -9,15 +9,16 @@ int main(int argc, char* argv[])
 	//{	
 	//	auto file = files[job_index];
 	//	std::string filename = file.string();
-		std::string filename = paths::input + "n60w120.001/discrete/size_80/robust/dis-n60w120.001_1.txt";
-		//std::string filename = paths::input + "rbg010asep/discrete/size_20/robust/dis-rbg010asep_2.txt";
+	std::string filename = paths::input + "n60w120.001/discrete/size_80/robust/dis-n60w120.001_1.txt";
+	//std::string filename = paths::input + "rbg010asep/discrete/size_20/robust/dis-rbg010asep_2.txt";
 
-		runner run = runner();
+	runner run = runner();
 
-		run.runBiObjRTSPTW(filename, PrimObjType::distance, SecObjType::delta, MethodType::rectangle, 900);
+	run.runBiObjRTSPTW(filename, PrimObjType::distance, SecObjType::delta, MethodType::multi_direction, 900); // example for running the BRTSPTW(B) using MBBM
+	//run.runBiObjRTSPTW(filename, PrimObjType::distance, SecObjType::slack, MethodType::rectangle, 900); // To run BRTSPTW(S), remember to set "BUDGET_INTERVAL" in config.h to 1 if using multiple sub-intervals
 
-	//	job_index++;
-	//}
+//	job_index++;
+//}
 
 	return 0;
 }
