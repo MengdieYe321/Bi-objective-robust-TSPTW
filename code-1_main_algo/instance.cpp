@@ -58,7 +58,7 @@ bool instance::read_data(std::string input)
 			std::string budgetfile;
 			if (MULTIPLE_INTERVALS && _secobj_type == SecObjType::slack)
 			{
-				budgetfile = paths::input_interval + "N12/size_20/MBBM/" + _prob_name + ".txt"; //when cost-slack model + multiple interval
+				budgetfile = paths::input_interval + "N60/size_80/MBBM/" + _prob_name + ".txt"; //when cost-slack model + multiple interval
 			}
 			else
 			{
